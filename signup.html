@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Signup Form</title>
+    </head>
+    <style>
+        html,body{
+            margin: 0%;
+            height: 100%;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #6a11cb, #2575fc); 
+        }
+        .signup{
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            background-color: white;
+            color: black;
+            width: 250px;
+            border-radius: 10px;
+            height: 300px;
+        }
+        input{
+            width:200px;
+            margin-left: 20px;
+            border: 1px solid hsl(0, 0%, 80%);
+            padding: 5px;
+        }
+        .button{
+            width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 15px;
+            background: #2575fc;
+            border-radius: 5px;
+            border: none;
+            padding: 5px;
+            margin-left: auto;
+            margin-right: auto;
+            cursor: pointer;
+            transition: filter 0.2s ease;
+        }
+        button:hover {
+                filter: brightness(85%);
+            }
+        td {
+            transition: background 0.3s, color 0.3s;
+        }
+            td:hover {
+                background: #2575fc;
+                color: white;
+                border-radius: 10px;
+                padding: 3px;
+            }
+    </style>
+    <script>
+            function Validate(){
+                var vemail=f1.email.value;
+                var vpassword=f1.pwd.value;
+                var cpassword=f1.cpwd.value;
+                if(vemail.length==0){
+                    alert("Please enter your email");
+                    return;
+                }
+                if(vpassword.length==0){
+                    alert("Please fill the password");
+                    return;
+                }
+                if(vpassword!==cpassword){
+                    alert("Password is not matched!!");
+                    return;
+                }
+                if(vemail.length>0 && vpassword.length>0){
+                    alert("Registration Successful");
+                }
+            }
+        </script>
+    <body>
+        <form name="f1">
+        <div class="signup">
+            <h2>Signup Form</h2>
+            <table>
+                <tr>
+                    <td onclick="window.location.href='login.html'">Login</td>
+                    <td onclick="window.location.href='signup.html'">Signup</td>
+
+                </tr>
+            </table><br>
+            <input type="email" id="email" placeholder="Email Address"><br>
+            <input type="pwd" id="pwd" placeholder="Password"><br>
+            <input type="cpwd" id="cpwd" placeholder="Confirm Password"><br>
+            <button class="button">Signup</button>
+        </div>
+        </form>
+    </body>
+</html>

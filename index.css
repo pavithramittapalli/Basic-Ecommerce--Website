@@ -1,0 +1,210 @@
+html,body{
+  margin: 0%;
+  height: 100%;
+}
+body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+   padding-top: 50px;
+}
+/*.card{
+  border: 2px solid black;
+  border-radius: 10%;
+  padding: 20px;
+  box-shadow: 0 4px 12px hsla(0, 64%, 40%, 0.4);
+  border: none;
+  max-width: fit-content;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.card-title{
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  color: coral;
+  text-shadow: 0 2px 2px hsla(0, 64%, 40%, 0.4);
+}
+.card-image{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+}
+.student{
+  border: 2px solid black;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  padding: 15px;
+  background-color: rgb(206, 66, 199);
+  color: whitesmoke;
+  border-radius: 10%;
+  border:none;
+  box-shadow: 0 4px 15px rgba(206, 66, 199, 0.4);
+  margin-bottom: 20px;
+}
+.increment-button{
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  text-align: center;
+  margin: 15px;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: hsl(188, 93%, 51%);
+  color: white;
+  border: none;
+  width: 100px;
+}
+.decrement-button{
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  text-align: center;
+  margin: 15px;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: hsl(188, 93%, 51%);
+  color: white;
+  border: none;
+  width: 100px;
+}
+.reset-button{
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  text-align: center;
+  margin: 15px;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: hsl(188, 93%, 51%);
+  color: white;
+  border: none;
+  width: 100px;
+}
+.display{
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  font-size: 10.5em;
+  margin-top: 0px;
+  margin-bottom: 30px;
+}
+  */
+
+.complete {
+  text-align: center;
+  background-color: hsl(192, 64%, 52%);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 15px;
+  border-radius: 10px;
+}
+.image{
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+}
+.container {
+  display: flex;
+  justify-content: center; /* Aligns items horizontally */
+  gap: 20px;               /* Space between product cards */
+  flex-wrap: wrap;         /* Moves items to next line if screen is small */
+  margin: 20px;
+}
+.buttontag{
+  border: hsl(0, 0%, 80%);
+  background-color: rgb(252, 250, 250);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 5px;
+  width: 200px;
+  transition: filter 0.2% ease;
+}
+.complete:hover{
+  background-color: hsl(192, 64%, 42%);
+}
+.navbar {
+  position: fixed;       /* Sticks it to the top */
+  top: 0;                /* Aligns it at the very top */
+  left: 0;               /* Aligns it to the left edge */
+  width: 100%;           /* Full width across the screen */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: white;
+  padding: 8px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin:0;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
+
+.nav-links li {
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.nav-links li:hover {
+  color: #ff9800;
+}
+
+.cart {
+  font-size: 30px;
+  cursor: pointer;
+  margin-right: 30px;
+}
+.logo-image {
+  width: 50px;   /* Adjust size as needed */
+  height: 50px;
+  border-radius: 50%; /* Optional: rounded edges */
+}
+.direct-links {
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s;
+}
+
+.direct-links:hover {
+  color: #ff9800;
+}
+.cart {
+  position: relative;
+  font-size: 30px;
+  cursor: pointer;
+  margin-right: 20px; /* Added space to avoid overlap with screen edge */
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;          /* Move it slightly higher */
+  right: -15px;       /* Move it further to the right */
+  background-color: red;
+  color: white;
+  font-size: 14px;    /* Increase size for better visibility */
+  font-weight: bold;  /* Make number bold */
+  padding: 3px 7px;   /* Slightly larger badge */
+  border-radius: 50%;
+  min-width: 20px;    /* Prevent shrinking if number increases */
+  text-align: center;
+}
+.footer {
+  text-align: center;
+  background-color: #333;
+  color: white;
+  padding: 5px;
+  position: fixed;
+  bottom: 0;
+  left: 0;          /* Ensure it starts from the left edge */
+  width: 100%;      /* Full width */
+  font-size: 14px;
+  margin: 0;
+  z-index: 1000;    /* Make sure it's on top of other elements */
+}
