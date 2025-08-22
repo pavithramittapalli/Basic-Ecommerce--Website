@@ -1,103 +1,212 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Form</title>
-    </head>
-    <body>
-        <script>
-            function Validate(){
-                var vemail=f1.email.value;
-                var vpassword=f1.password.value;
-                if(vemail.length==0){
-                    alert("Please enter your email");
-                    return;
-                }
-                if(vpassword.length==0){
-                    alert("Please fill the password");
-                    return;
-                }
-                if(vemail.length>0 && vpassword.length>0){
-                    alert("Registration Successful");
-                }
-            }
-        </script>
-        <style>
-            html,body{
-                margin: 0%;
-                height: 100%;
-            }
-            body{
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background: linear-gradient(135deg, #6a11cb, #2575fc); 
-            }
-            .login{
-                font-family: Arial, Helvetica, sans-serif;
-                background: #2575fc;
-                display: flex;
-                text-align: center;
-                flex-direction: column;
-                width: 250px;
-                background-color: white;
-                color: black;
-                height: fit-content;
-                border-radius: 10px;
-                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-            }
-            input{
-                width:200px;
-                margin-left: 20px;
-                border: 1px solid hsl(0, 0%, 80%);
-                padding: 5px;
-            }
-            button{
-                width: 220px;
-                padding: 5px;
-                margin-left: auto;
-                margin-right: auto;
-                border-radius: 5px;
-                border: 1px solid black;
-                background: #2575fc;
-                color: white;
-                border: none;
-                cursor: pointer;
-                transition: filter 0.2s ease;
-            }
-            button:hover {
-                filter: brightness(85%);
-            }
-            .signuplink{
-                text-decoration: none;
-                color: rgb(17, 122, 241);
-            }
-            td {
-                transition: background 0.3s, color 0.3s;
-            }
-            td:hover {
-                background: #2575fc;
-                color: white;
-                border-radius: 10px;
-                padding: 3px;
-            }
-        </style>
-        <form name="f1">
+<head>
+    <title>Login Form</title>
+    <style>
+        html,body{
+            margin: 0;
+            height: 100%;
+        }
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #6a11cb, #2575fc); 
+        }
+        .login{
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            text-align: center;
+            flex-direction: column;
+            width: 250px;
+            background-color: white;
+            color: black;
+            height: fit-content;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            padding: 15px;
+        }
+        input{
+            width:200px;
+            margin-left: 20px;
+            border: 1px solid hsl(0, 0%, 80%);
+            padding: 8px;
+            border-radius: 5px;
+            margin-top: 8px;
+        }
+        button{
+            width: 220px;
+            padding: 8px;
+            margin: 10px auto;
+            border-radius: 5px;
+            background: #2575fc;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: filter 0.2s ease;
+        }
+        button:hover {
+            filter: brightness(85%);
+        }
+        .signuplink{
+            text-decoration: none;
+            color: rgb(17, 122, 241);
+        }
+    </style>
+</head>
+<body>
+    <form onsubmit="return login(event)">
         <div class="login">
             <h2>Login Form</h2>
-            <table>
-                <tr>
-                    <td onclick="window.location.href='login.html'">Login</td>
-                    <td onclick="window.location.href='signup.html'">Signup</td>
-
-                </tr>
-            </table> <br>
-                <input type="email" id="email" placeholder="Email Address"><br>
-                <input type="password" id="password" placeholder="Password"><br>
-                <button onClick="Validate()">Login</button><br>
-                <p>Not a member?
-                    <a class="signuplink" href="signup.html">Signup now</a>
-                </p>
+            <input type="email" id="email" placeholder="Email Address" required><br>
+            <input type="password" id="password" placeholder="Password" required><br>
+            <button type="submit">Login</button><br>
+            <p>Not a member?
+                <a class="signuplink" href="signup.html">Signup now</a>
+            </p>
         </div>
-        </form>
-    </body>
+    </form>
+
+    <script>
+    async function login(event){
+        event.preventDefault();
+
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
+
+        if(!email || !password){
+            alert("Please enter both email and password.");
+            return;
+        }
+
+        try {
+            const res = await fetch("http://localhost:5001/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password })
+            });
+
+            const data = await res.json();
+            alert(data.message);
+
+            if(res.ok && data.message === "Login successful!"){
+                // ✅ Save login state
+                localStorage.setItem("userEmail", email);
+
+                // ✅ Redirect to React app (App2)
+                window.location.href = "http://localhost:5173";
+            }
+        } catch (err) {
+            alert("Error connecting to server. Please try again later.");
+            console.error(err);
+        }
+    }
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Form</title>
+    <style>
+        html,body{
+            margin: 0;
+            height: 100%;
+        }
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #6a11cb, #2575fc); 
+        }
+        .login{
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            text-align: center;
+            flex-direction: column;
+            width: 250px;
+            background-color: white;
+            color: black;
+            height: fit-content;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            padding: 15px;
+        }
+        input{
+            width:200px;
+            margin-left: 20px;
+            border: 1px solid hsl(0, 0%, 80%);
+            padding: 8px;
+            border-radius: 5px;
+            margin-top: 8px;
+        }
+        button{
+            width: 220px;
+            padding: 8px;
+            margin: 10px auto;
+            border-radius: 5px;
+            background: #2575fc;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: filter 0.2s ease;
+        }
+        button:hover {
+            filter: brightness(85%);
+        }
+        .signuplink{
+            text-decoration: none;
+            color: rgb(17, 122, 241);
+        }
+    </style>
+</head>
+<body>
+    <form onsubmit="return login(event)">
+        <div class="login">
+            <h2>Login Form</h2>
+            <input type="email" id="email" placeholder="Email Address" required><br>
+            <input type="password" id="password" placeholder="Password" required><br>
+            <button type="submit">Login</button><br>
+            <p>Not a member?
+                <a class="signuplink" href="signup.html">Signup now</a>
+            </p>
+        </div>
+    </form>
+
+    <script>
+    async function login(event){
+        event.preventDefault();
+
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
+
+        if(!email || !password){
+            alert("Please enter both email and password.");
+            return;
+        }
+
+        try {
+            const res = await fetch("http://localhost:5001/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password })
+            });
+
+            const data = await res.json();
+            alert(data.message);
+
+            if(res.ok && data.message === "Login successful!"){
+                // ✅ Save login state
+                localStorage.setItem("userEmail", email);
+
+                // ✅ Redirect to React app (App2)
+                window.location.href = "http://localhost:5173";
+            }
+        } catch (err) {
+            alert("Error connecting to server. Please try again later.");
+            console.error(err);
+        }
+    }
+    </script>
+</body>
 </html>
