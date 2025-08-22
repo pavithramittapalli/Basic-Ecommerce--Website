@@ -1,101 +1,103 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Signup Form</title>
-    </head>
+<head>
+    <title>Signup Form</title>
     <style>
         html,body{
-            margin: 0%;
+            margin: 0;
             height: 100%;
         }
         body{
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             background: linear-gradient(135deg, #6a11cb, #2575fc); 
         }
         .signup{
             font-family: Arial, Helvetica, sans-serif;
             display: flex;
-            flex-direction: column;
             text-align: center;
+            flex-direction: column;
+            width: 250px;
             background-color: white;
             color: black;
-            width: 250px;
+            height: fit-content;
             border-radius: 10px;
-            height: 300px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            padding: 15px;
         }
         input{
             width:200px;
             margin-left: 20px;
             border: 1px solid hsl(0, 0%, 80%);
-            padding: 5px;
-        }
-        .button{
-            width: 200px;
-            margin-left: auto;
-            margin-right: auto;
-            margin-bottom: 15px;
-            background: #2575fc;
+            padding: 8px;
             border-radius: 5px;
+            margin-top: 8px;
+        }
+        button{
+            width: 220px;
+            padding: 8px;
+            margin: 10px auto;
+            border-radius: 5px;
+            background: #2575fc;
+            color: white;
             border: none;
-            padding: 5px;
-            margin-left: auto;
-            margin-right: auto;
             cursor: pointer;
             transition: filter 0.2s ease;
         }
         button:hover {
-                filter: brightness(85%);
-            }
-        td {
-            transition: background 0.3s, color 0.3s;
+            filter: brightness(85%);
         }
-            td:hover {
-                background: #2575fc;
-                color: white;
-                border-radius: 10px;
-                padding: 3px;
-            }
+        .loginlink{
+            text-decoration: none;
+            color: rgb(17, 122, 241);
+        }
     </style>
-    <script>
-            function Validate(){
-                var vemail=f1.email.value;
-                var vpassword=f1.pwd.value;
-                var cpassword=f1.cpwd.value;
-                if(vemail.length==0){
-                    alert("Please enter your email");
-                    return;
-                }
-                if(vpassword.length==0){
-                    alert("Please fill the password");
-                    return;
-                }
-                if(vpassword!==cpassword){
-                    alert("Password is not matched!!");
-                    return;
-                }
-                if(vemail.length>0 && vpassword.length>0){
-                    alert("Registration Successful");
-                }
-            }
-        </script>
-    <body>
-        <form name="f1">
+</head>
+<body>
+    <form onsubmit="return signup(event)">
         <div class="signup">
             <h2>Signup Form</h2>
-            <table>
-                <tr>
-                    <td onclick="window.location.href='login.html'">Login</td>
-                    <td onclick="window.location.href='signup.html'">Signup</td>
-
-                </tr>
-            </table><br>
-            <input type="email" id="email" placeholder="Email Address"><br>
-            <input type="pwd" id="pwd" placeholder="Password"><br>
-            <input type="cpwd" id="cpwd" placeholder="Confirm Password"><br>
-            <button class="button">Signup</button>
+            <input type="email" id="email" placeholder="Email Address" required><br>
+            <input type="password" id="password" placeholder="Password" required><br>
+            <button type="submit">Signup</button><br>
+            <p>Already a member?
+                <a class="loginlink" href="login.html">Login now</a>
+            </p>
         </div>
-        </form>
-    </body>
+    </form>
+
+    <script>
+    async function signup(event){
+        event.preventDefault();
+
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
+
+        if(!email || !password){
+            alert("Please enter both email and password.");
+            return;
+        }
+
+        try {
+            const res = await fetch("http://localhost:5001/signup", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password })
+            });
+
+            const data = await res.json();
+            alert(data.message);
+
+            if(res.ok && data.message === "User registered successfully!"){
+                // redirect to login page served by Vite
+                window.location.href = "http://localhost:5173/login.html"; 
+            }
+        } catch (err) {
+            alert("Error connecting to server. Please try again later.");
+            console.error(err);
+        }
+    }
+    </script>
+</body>
 </html>
